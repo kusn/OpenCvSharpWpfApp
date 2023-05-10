@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCvSharpWpfApp"
+        xmlns:viewModel="clr-namespace:OpenCvSharpWpfApp.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Command="{Binding OpenImageCommand}">
+                <TextBlock Text="Выбрать файл"/>
+            </Button>
+            <ComboBox ItemsSource="{Binding AvailableFilters}" SelectedItem="{Binding SelectedFilter}" IsEnabled="{Binding IsEnabled}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Image Source="{Binding Image}"/>
+            <Button Command="{Binding SaveImageCommand}">
+                <TextBlock Text="Сохранить"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
